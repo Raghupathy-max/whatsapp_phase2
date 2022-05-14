@@ -59,7 +59,7 @@
                      redirect: 'follow'
                  };
 
-               const res = await fetch("http://127.0.0.1:8000/api/atek/insert", requestOptions)
+               const res = await fetch("api/atek/insert", requestOptions)
 
                   const data = await res.json();
                 console.log(data);

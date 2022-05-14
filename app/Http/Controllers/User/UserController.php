@@ -126,7 +126,7 @@ class UserController extends Controller
                 "from": "14157386102",
                 "to": "91' . $cust_mobile . '",
                 "message_type": "text",
-                "text": "Hi, Welcome to Mumbai Metro One. Please click the link http://127.0.0.1/index/' . $token . '",
+                "text": "Hi, Welcome to Mumbai Metro One. Please click the link www.rtfsolutions.tech/index/' . $token . '",
                 "channel": "whatsapp"
               }', 'application/json')
             ->post('https://messages-sandbox.nexmo.com/v1/messages')
