@@ -159,7 +159,7 @@
 
         methods : {
             getFare: async function () {
-                const response = await axios.post('api/get/fare', {
+                const response = await axios.post('/api/get/fare', {
                     "source": this.ticket.source_id,
                     "destination": this.ticket.destination_id,
                     "pass_id": this.ticket.pass_id
@@ -191,7 +191,7 @@
                     redirect: 'follow'
                 };
 
-              const res = await fetch("api/gen/order", requestOptions)
+              const res = await fetch("/api/gen/order", requestOptions)
                   const data = await res.json();
                 console.log(data);
 

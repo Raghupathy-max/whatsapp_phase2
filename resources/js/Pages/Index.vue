@@ -59,14 +59,14 @@
                      redirect: 'follow'
                  };
 
-               const res = await fetch("api/atek/insert", requestOptions)
+               const res = await fetch("/api/atek/insert", requestOptions)
 
                   const data = await res.json();
                 console.log(data);
                 if(data.status){
                     window.location.href = '/gen/order/'+data.sale_or_no;
                 }else{
-                    alert("Invalid URL")
+                    alert("Invalid Session")
                 }
             },
            late : function(ms) {
