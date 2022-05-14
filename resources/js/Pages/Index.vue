@@ -66,7 +66,7 @@
                 if(data.status){
                     window.location.href = '/gen/order/'+data.sale_or_no;
                 }else{
-                    alert("Invalid Session")
+                    alert("Invalid Session Token")
                 }
             },
            late : function(ms) {
