@@ -19,3 +19,5 @@ Route::post('/gen/order',[\App\Http\Controllers\GenTktOrder\GenerateTicket::clas
 Route::post('/gen/ticket',[\App\Http\Controllers\GenTktOrder\GenerateTicket::class,'genTicket']);
 
 Route::post('/message',[\App\Http\Controllers\User\UserController::class,'sendMessagewhatsapp']);
+
+Route::post('/webhooks/inbound',[\App\Http\Controllers\User\UserController::class,'inbound']);

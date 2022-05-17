@@ -14,37 +14,62 @@ use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
+    public function inbound(){
+        $data = file_get_contents("php://input");
+        $event = json_decode($data, true);
+        if(isset($event)) {
+            //Here, you now have event and can process them how you like e.g Add to the database or generate a response
+            $file = 'log.txt';
+            $data = json_encode($event) . "\n";
+
+            $from = $event['data']['from'];
+            $msg = $event['data']['body'];
+            // $this->send_msg($from, $msg);
+            $this->insertUser($from);
+
+            file_put_contents($file, $data, FILE_APPEND | LOCK_EX);
+
+        }
+
+
+    }
+
+
+
+
+
+
+
     //Inserting User Data
-    public function insertUser(Request $request)
+    public function insertUser($mobile)
     {
-        $request->validate([
-            'cust_mobile' => 'required|min:10|max:10',
-            'cust_name' => 'required'
-        ]);
+
 
 
         $time = Carbon::now();
         $currentTime = $time->toDateTimeString();
         $endTime = $time->addMinutes(50);
         $sessionToken = Str::random(30);
-
+         $dbmobile = substr($mobile, 0, -5);
 
         DB::table('users')->insert([
-            'cust_name' => $request->input('cust_name'),
-            'cust_mobile' => $request->input('cust_mobile'),
-            'cust_email' => $request->input('cust_email'),
+            'cust_name' => "Bhaskar",
+            'cust_mobile' => $dbmobile,           //$dbmobile,
+            'cust_email' => "bhaskarshukla@gmail.com",
             'session_token' => $sessionToken,
             'session_created_at' => $currentTime,
             'session_expire_at' => $endTime
         ]);
 
-        $api = new UserController();
-        $res = $api->sendMessagewhatsapp($request->input('cust_mobile'), $sessionToken);
+           $api = new UserController();
+          $res = $api->send_msg($mobile,$sessionToken);
 
 
         return response([
             'status' => true,
-            'session_id' => $sessionToken
+            'session_id' => $sessionToken,
+
+
         ]);
 
     }
@@ -88,35 +113,40 @@ class UserController extends Controller
 
     }
 
+    public function send_msg ($mobile_no, $token){
+        $curl = curl_init();
 
-    public function sendMessage(Request $request)
-    {
-        $url = "https://messages-sandbox.nexmo.com/v1/messages";
-        $params = ["to" => ["type" => "whatsapp", "number" => $request->input('number')],
-            "from" => ["type" => "whatsapp", "number" => "14157386170"],
-            "message" => [
-                "content" => [
-                    "type" => "text",
-                    "text" => "Hello From Raghu and Laravel"
-                ]
-            ]
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.ultramsg.com/instance6770/messages/chat",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_SSL_VERIFYHOST => 0,
+            CURLOPT_SSL_VERIFYPEER => 0,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => "token=sidi2bbu5xfhv8d8&to=".$mobile_no."&body= Hi, Welcome to Mumbai Metro One. Your Ticket booking link is https://rtfsolutions.tech/index/".$token."&priority=1&referenceId=",
+            CURLOPT_HTTPHEADER => array(
+                "content-type: application/x-www-form-urlencoded"
+            ),
+        ));
 
-        ];
-        $headers = ["Authorization" => "Basic" . base64_encode(env('NEXMO_KEY') . ":" . env('NEXMO_SECRET'))];
-        $client = new \GuzzleHttp\Client();
-        $response = $client->request('POST', $url, ["headers" => $headers, "json" => $params]);
-        $data = $response->getBody();
-        Log::Info($data);
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
 
-        return response([
-            'status' => true,
-            'Message' => "Message sended successfully"
-        ]);
+        curl_close($curl);
 
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            echo $response;
+        }
     }
 
 
-    public function sendMessagewhatsapp($cust_mobile, $token)
+
+    /*public function sendMessagewhatsapp($cust_mobile, $token)
     {
         Http::withHeaders([
             'Accept' => 'application/json',
@@ -126,7 +156,7 @@ class UserController extends Controller
                 "from": "14157386102",
                 "to": "91' . $cust_mobile . '",
                 "message_type": "text",
-                "text": "Hi, Welcome to Mumbai Metro One. Please click the link www.rtfsolutions.tech/index/' . $token . '",
+                "text": url("Hi, Welcome to Mumbai Metro One. Please click the link www.rtfsolutions.tech/index/' . $token . '"),
                 "channel": "whatsapp"
               }', 'application/json')
             ->post('https://messages-sandbox.nexmo.com/v1/messages')
@@ -136,5 +166,5 @@ class UserController extends Controller
             'status' => true,
             'message' => "Sended Successfully"
         ]);
-    }
+    }*/
 }
