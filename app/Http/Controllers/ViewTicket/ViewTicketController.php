@@ -76,7 +76,7 @@ class ViewTicketController extends Controller
             CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => "token=sidi2bbu5xfhv8d8&to=".$mobile_no."&body= Happy Journey,\n\nClick on the below link to view your ticket\n\nhttps://mmopl-wa.atekpayments.com/view/ticket/".$order_id."&priority=1&referenceId=",
+            CURLOPT_POSTFIELDS => "token=sidi2bbu5xfhv8d8&to=".$mobile_no."&body= Happy Journey,\n\nClick on the below link to view your ticket\n\nhttps://mmopl-wa.atekpayments.com/ticket/view/".$order_id."&priority=1&referenceId=",
             CURLOPT_HTTPHEADER => array(
                 "content-type: application/x-www-form-urlencoded"
             ),
