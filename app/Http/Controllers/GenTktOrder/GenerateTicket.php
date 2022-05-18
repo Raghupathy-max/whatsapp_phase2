@@ -4,6 +4,7 @@ namespace App\Http\Controllers\GenTktOrder;
 
 use App\Http\Controllers\Api\MMOPL\ApiController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\ViewTicket\ViewTicketController;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
@@ -40,8 +41,8 @@ class GenerateTicket extends Controller
             DB::table('sale_order')
                 ->where('sale_or_no','=',$request->input('sale_or_no'))
                 ->update([
-                    'src_stn_id'   =>$request->input('src_stn_id'),
-                    'des_stn_id'   =>$request->input('des_stn_id'),
+                    'src_stn_id'   => $request->input('src_stn_id'),
+                    'des_stn_id'   => $request->input('des_stn_id'),
                     'unit'         => $request->input('unit'),
                     'unit_price'   => $request->input('unit_price'),
                     'total_price'  => $request->input('total_price'),
@@ -115,6 +116,9 @@ class GenerateTicket extends Controller
                         'txn_date'      => $currentTime,
 
                     ]);
+
+                    $whatsapp = new ViewTicketController();
+                    $res = $whatsapp->send_tkt($data->whatsapp_no, $request->input('sale_or_no'));
                 }
             }else{
                 foreach ($trips as $trip){
@@ -133,6 +137,9 @@ class GenerateTicket extends Controller
                         'qr_data'       => $trip->qrCodeData,
                         'txn_date'      => $currentTime
                     ]);
+
+                    $whatsapp = new ViewTicketController();
+                    $res = $whatsapp->send_tkt($data->whatsapp_no, $request->input('sale_or_no'));
                 }
             }
 

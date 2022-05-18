@@ -55,6 +55,7 @@ class UserController extends Controller
         DB::table('users')->insert([
             'cust_name' => "Bhaskar",
             'cust_mobile' => $dbmobile,           //$dbmobile,
+            'whatsapp_no' => $mobile,
             'cust_email' => "bhaskarshukla@gmail.com",
             'session_token' => $sessionToken,
             'session_created_at' => $currentTime,
@@ -126,7 +127,7 @@ class UserController extends Controller
             CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => "token=sidi2bbu5xfhv8d8&to=".$mobile_no."&body= Hi, Welcome to Mumbai Metro One. Your Ticket booking link is https://rtfsolutions.tech/index/".$token."&priority=1&referenceId=",
+            CURLOPT_POSTFIELDS => "token=sidi2bbu5xfhv8d8&to=".$mobile_no."&body= Hi, Welcome to Mumbai Metro One. Your Ticket booking link is https://mmopl-wa.atekpayments.com/index/".$token."&priority=1&referenceId=",
             CURLOPT_HTTPHEADER => array(
                 "content-type: application/x-www-form-urlencoded"
             ),

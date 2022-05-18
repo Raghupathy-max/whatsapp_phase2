@@ -61,6 +61,7 @@ class SaleOrderController extends Controller
                    'cust_id'            => $user_data->cust_id,
                    'cust_name'          => $user_data->cust_name,
                    'cust_mobile'        => $user_data->cust_mobile,
+                   'whatsapp_no'        => $user_data->whatsapp_no,
                    'cust_email'         => $user_data->cust_email,
                     'atek_token'        => $saleOrderNo,
                     'token_created_at'  => $currentTime,
