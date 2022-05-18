@@ -49,7 +49,7 @@
                 const data = await res.json();
                 console.log(data);
 
-                location.replace('https://wa.me/9167112684')
+                window.location.href = '/ticket/view/'+this.order_id;
             }
         },
     }
