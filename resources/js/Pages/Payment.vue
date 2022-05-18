@@ -48,7 +48,6 @@
                 const res = await fetch("/api/gen/ticket", requestOptions)
                 const data = await res.json();
                 console.log(data);
-
                 window.location.href = '/ticket/view/'+this.token;
             }
         },
