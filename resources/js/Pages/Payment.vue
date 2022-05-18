@@ -49,7 +49,7 @@
                 const data = await res.json();
                 console.log(data);
 
-                window.location.href = '/ticket/view/'+this.order_id;
+                window.location.href = '/ticket/view/'+this.token;
             }
         },
     }
