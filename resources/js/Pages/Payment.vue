@@ -8,7 +8,7 @@
             </button>
             <br>
             <br>
-            <button class="w-full py-3 bg-blue-500 border rounded-2xl text-gray-100 font-bold hover:bg-blue-700">
+            <button v-on:click="cancelFn" class="w-full py-3 bg-blue-500 border rounded-2xl text-gray-100 font-bold hover:bg-blue-700">
                 CANCEL
             </button>
         </div>
@@ -49,8 +49,14 @@
                 const data = await res.json();
                 console.log(data);
                 window.location.href = '/ticket/view/'+this.token;
+            },
+
+            cancelFn : function () {
+                window.location.href = '/gen/order/'+this.token;
             }
         },
+
+
     }
 
 </script>
