@@ -49,7 +49,7 @@ class UserController extends Controller
         $time = Carbon::now();
         $currentTime = $time->toDateTimeString();
         $endTime = $time->addMinutes(50);
-        $sessionToken = Str::random(30);
+        $sessionToken = Str::random(5);
          $dbmobile = substr($mobile, 0, -5);
 
         DB::table('users')->insert([
@@ -127,7 +127,7 @@ class UserController extends Controller
             CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => "token=sidi2bbu5xfhv8d8&to=".$mobile_no."&body= Hi, Welcome to Mumbai Metro One. Your Ticket booking link is https://mmopl-wa.atekpayments.com/index/".$token."&priority=1&referenceId=",
+            CURLOPT_POSTFIELDS => "token=sidi2bbu5xfhv8d8&to=".$mobile_no."&body= Hi,\nWelcome to Mumbai Metro One.\n\nClick below link to book your ticket\n\nhttps://mmopl-wa.atekpayments.com/index/".$token."&priority=1&referenceId=",
             CURLOPT_HTTPHEADER => array(
                 "content-type: application/x-www-form-urlencoded"
             ),
@@ -143,6 +143,9 @@ class UserController extends Controller
         } else {
             echo $response;
         }
+
+
+
     }
 
 

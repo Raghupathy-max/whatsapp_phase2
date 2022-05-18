@@ -59,6 +59,7 @@ class ApiController extends Controller
             ->post($this->base_url . '/qrcode/issueToken')
             ->collect();
         return json_decode($response);
+
     }
 
     public function getSlaveStatus($slave)
