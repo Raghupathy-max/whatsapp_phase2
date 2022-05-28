@@ -118,7 +118,7 @@ class UserController extends Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.ultramsg.com/instance6770/messages/chat",
+            CURLOPT_URL => "https://api.ultramsg.com/instance7585/messages/chat",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -127,7 +127,7 @@ class UserController extends Controller
             CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => "token=sidi2bbu5xfhv8d8&to=".$mobile_no."&body= Hi,\nWelcome to Mumbai Metro One,\n\nClick below link to book your ticket\n\nhttps://mmopl-wa.atekpayments.com/index/".$token."&priority=1&referenceId=",
+            CURLOPT_POSTFIELDS => "token=kh3213l8sbr5uo9n&to=".$mobile_no."&body= Hi,\nWelcome to Mumbai Metro One,\n\nClick below link to book your ticket\n\nhttps://mmopl-wa.atekpayments.com/index/".$token."&priority=1&referenceId=",
             CURLOPT_HTTPHEADER => array(
                 "content-type: application/x-www-form-urlencoded"
             ),
