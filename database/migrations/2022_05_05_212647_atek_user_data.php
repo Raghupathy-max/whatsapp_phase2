@@ -18,6 +18,7 @@ class AtekUserData extends Migration
             $table->integer('cust_id');
             $table->string('cust_name');
             $table->bigInteger('cust_mobile');
+            $table->string('whatsapp_no');
             $table->string('cust_email');
             $table->string('atek_token')->nullable();
             $table->timestamp('token_created_at')->nullable();

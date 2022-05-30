@@ -62,8 +62,7 @@ class UserController extends Controller
             'session_expire_at' => $endTime
         ]);
 
-           $api = new UserController();
-          $res = $api->send_msg($mobile,$sessionToken);
+           $this->send_msg($mobile, $sessionToken);
 
 
         return response([

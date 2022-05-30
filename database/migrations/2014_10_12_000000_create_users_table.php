@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->id('cust_id');
             $table->string('cust_name');
             $table->bigInteger('cust_mobile');
+            $table->string('whatsapp_no');
             $table->string('cust_email');
             $table->string('session_token')->nullable();
             $table->timestamp('session_created_at')->nullable();
